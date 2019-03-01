@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">	
+	<!--  
+	using setter injection
+	
+	<bean id="emp" class ="com.cg.beans.Employee">
+	<property name= "firstName" value ="yogini"></property>
+	<property name= "lastName" value ="Naik"></property>
+	<property name= "age" value ="32"></property>
+	
+	</bean>
+
+	-->
+	  
+	<!-- 
+		using setter
+		<bean id="emp" class ="com.cg.beans.Employee">
+		<constructor-arg index ="0" value ="Yogini"></constructor-arg>
+		<constructor-arg index ="1" value ="Naik"></constructor-arg>
+		<constructor-arg index ="2" value ="33"></constructor-arg>
+	
+		</bean>
+		 -->
+		
+		
+			<!--   using constructor injection  --> 
+		<bean id="emp" class ="com.cg.beans.Employee">
+		<constructor-arg type ="String" value ="Yogini Naik"></constructor-arg>
+		<constructor-arg type = "int" value ="32"></constructor-arg>
+		<property name="skills">
+		<list>
+		<value>c</value>
+		<value>c++</value>
+		<value>java</value>
+		<value>hibernate</value>
+		<value>spring</value>
+		<value>Html 5</value>
+		<value>Css</value>
+		</list>
+		</property>
+		</bean> 
+		<bean id ="cred" class="com.cg.beans.UserCredentials" >
+		<property name ="credentials">
+		<map>
+		<entry key ="user1 " value ="user1@123" ></entry>
+		<entry key ="user2 " value ="user2@123" ></entry>
+		<entry key =" user3" value ="user3@123" ></entry>
+		<entry key =" user4" value ="user4@123" ></entry>
+		<entry key =" user5" value ="user5@123" ></entry>
+		<entry key =" user6" value ="user6@123" ></entry>
+		
+		</map>
+		
+		</property>
+		
+		
+		</bean>
+		
+		
+		</beans>
+		
