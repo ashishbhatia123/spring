@@ -1,0 +1,1058 @@
+package com.cg.beans;
+
+public class Employee {
+private String firstName;
+private String lastName;
+private int age;
+public Employee(String firstName, String lastName, int age) {
+	super();
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.age = age;
+}
+public Employee() {
+	super();
+	// TODO Auto-generated constructor stub
+}
+public String getFirstName() {
+	return firstName;
+}
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
+public String getLastName() {
+	return lastName;
+}
+public void setLastName(String lastName) {
+	this.lastName = lastName;
+}
+public int getAge() {
+	return age;
+}
+public void setAge(int age) {
+	this.age = age;
+}
+@Override
+public String toString() {
+	return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + "]";
+}
+
+
+}
+
+
+
+---------------------
+
+
+package com.cg.beans;
+
+
+
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+public class Client {
+	public static void main(String[] args) {
+		/*Employee emp = new Employee();
+		emp.setFirstName("yogini");
+		emp.setLastName("Naik");
+		emp.setAge(33);
+		System.out.println(emp);*/
+		
+		Resource res = new ClassPathResource("beans.xml");
+		XmlBeanFactory factory =new XmlBeanFactory(res);
+		
+		Employee employee =(Employee) factory.getBean("emp");
+		employee.setFirstName("A");
+		employee.setLastName("B");
+		employee.setAge(20);
+		
+		System.out.println(employee);
+	}
+
+}
+---------------
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">	
+	<bean id="emp" class ="com.cg.beans.Employee"></bean>
+
+
+</beans>
+
+==========================================
+package com.cg.beans;
+
+
+
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+public class Client {
+	public static void main(String[] args) {
+		
+		
+		Resource res = new ClassPathResource("beans.xml");
+		XmlBeanFactory factory =new XmlBeanFactory(res);
+		
+		Employee employee =(Employee) factory.getBean("emp");
+		
+		
+		System.out.println(employee);
+	}
+
+}
+
+
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">	
+	<bean id="emp" class ="com.cg.beans.Employee">
+	<property name= "firstName" value ="yogini"></property>
+	<property name= "lastName" value ="Naik"></property>
+	<property name= "age" value ="32"></property>
+	
+	</bean>
+
+
+</beans>
+
+
+
+
+--------------
+package com.cg.beans;
+
+
+
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+public class Client {
+	public static void main(String[] args) {
+		/*Employee emp = new Employee();
+		emp.setFirstName("yogini");
+		emp.setLastName("Naik");
+		emp.setAge(33);
+		System.out.println(emp);*/
+		
+		Resource res = new ClassPathResource("beans.xml");
+		XmlBeanFactory factory =new XmlBeanFactory(res);
+		
+		Employee employee =(Employee) factory.getBean("emp");
+		/*employee.setFirstName("A");
+		employee.setLastName("B");
+		employee.setAge(20);*/
+		
+		System.out.println(employee);
+	}
+
+}
+---------------------
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">	
+	
+	   
+		<!-- using setter-->
+		<bean id="emp" class ="com.cg.beans.Employee">
+		<constructor-arg index ="0" value ="Yogini"></constructor-arg>
+		<constructor-arg index ="1" value ="Naik"></constructor-arg>
+		<constructor-arg index ="2" value ="33"></constructor-arg>
+	
+		</bean>
+		 
+		
+		</beans>
+
+
+
+
+
+====================
+
+package com.cg.beans;
+
+public class Employee {
+private String firstName;
+private String lastName;
+private int age;
+public Employee(String firstName, String lastName, int age) {
+	super();
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.age = age;
+}
+public Employee() {
+	super();
+	// TODO Auto-generated constructor stub
+}
+
+
+public Employee(String name, int age) {
+	firstName= name.substring(0,name.indexOf(" "));
+	lastName= name.substring(name.indexOf(" ")+1);
+	this.age = age;
+}
+
+
+public String getFirstName() {
+	return firstName;
+}
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
+public String getLastName() {
+	return lastName;
+}
+public void setLastName(String lastName) {
+	this.lastName = lastName;
+}
+public int getAge() {
+	return age;
+}
+public void setAge(int age) {
+	this.age = age;
+}
+@Override
+public String toString() {
+	return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + "]";
+}
+
+
+}
+-------------------
+package com.cg.beans;
+
+
+
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+public class Client {
+	public static void main(String[] args) {
+		
+		
+		Resource res = new ClassPathResource("beans.xml");
+		XmlBeanFactory factory =new XmlBeanFactory(res);
+		
+		Employee employee =(Employee) factory.getBean("emp");
+		
+		
+		System.out.println(employee);
+	}
+
+}
+
+
+---------------------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">	
+	
+	  
+	
+		
+			 <!-- using constructor injection--> 
+		<bean id="emp" class ="com.cg.beans.Employee">
+		<constructor-arg type ="String" value ="Yogini Naik"></constructor-arg>
+		<constructor-arg type = "int" value ="32"></constructor-arg>
+	
+		</bean> 
+		</beans>
+		
+==============================================
+
+collection 
+
+
+
+package com.cg.beans;
+
+import java.util.ArrayList;
+
+public class Employee {
+private String firstName;
+private String lastName;
+private int age;
+ArrayList<String> skills;
+public Employee(String firstName, String lastName, int age) {
+	super();
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.age = age;
+	
+}
+public Employee() {
+	super();
+	// TODO Auto-generated constructor stub
+}
+
+
+public Employee(String name, int age) {
+	firstName= name.substring(0,name.indexOf(" "));
+	lastName= name.substring(name.indexOf(" ")+1);
+	this.age = age;
+}
+
+
+public ArrayList<String> getSkills() {
+	return skills;
+}
+public void setSkills(ArrayList<String> skills) {
+	this.skills = skills;
+}
+public String getFirstName() {
+	return firstName;
+}
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
+public String getLastName() {
+	return lastName;
+}
+public void setLastName(String lastName) {
+	this.lastName = lastName;
+}
+public int getAge() {
+	return age;
+}
+public void setAge(int age) {
+	this.age = age;
+}
+@Override
+public String toString() {
+	return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", skills=" + skills + "]";
+}
+
+
+}
+
+
+-----------------------
+
+
+package com.cg.beans;
+
+
+
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+public class Client {
+	public static void main(String[] args) {
+		
+		
+		Resource res = new ClassPathResource("beans.xml");
+		XmlBeanFactory factory =new XmlBeanFactory(res);
+		
+		Employee employee =(Employee) factory.getBean("emp");
+		
+		
+		System.out.println(employee);
+	}
+
+}
+
+-------------------
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">	
+	
+	  
+	
+		
+		
+			<!--   using constructor injection  --> 
+		<bean id="emp" class ="com.cg.beans.Employee">
+		<constructor-arg type ="String" value ="Yogini Naik"></constructor-arg>
+		<constructor-arg type = "int" value ="32"></constructor-arg>
+		<property name="skills">
+		<list>
+		<value>c</value>
+		<value>c++</value>
+		<value>java</value>
+		<value>hibernate</value>
+		<value>spring</value>
+		<value>Html 5</value>
+		<value>Css</value>
+		</list>
+		</property>
+		</bean> 
+		</beans>
+				
+
+===========================================
+
+package com.cg.beans;
+
+import java.util.ArrayList;
+
+public class Employee {
+private String firstName;
+private String lastName;
+private int age;
+ArrayList<String> skills;
+public Employee(String firstName, String lastName, int age) {
+	super();
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.age = age;
+	
+}
+public Employee() {
+	super();
+	// TODO Auto-generated constructor stub
+}
+
+
+public Employee(String name, int age) {
+	firstName= name.substring(0,name.indexOf(" "));
+	lastName= name.substring(name.indexOf(" ")+1);
+	this.age = age;
+}
+
+
+public ArrayList<String> getSkills() {
+	return skills;
+}
+public void setSkills(ArrayList<String> skills) {
+	this.skills = skills;
+}
+public String getFirstName() {
+	return firstName;
+}
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
+public String getLastName() {
+	return lastName;
+}
+public void setLastName(String lastName) {
+	this.lastName = lastName;
+}
+public int getAge() {
+	return age;
+}
+public void setAge(int age) {
+	this.age = age;
+}
+@Override
+public String toString() {
+
+	return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", skills=" + skills + "]";
+}
+
+
+}
+------------------
+
+
+package com.cg.beans;
+
+
+
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+public class Client {
+	public static void main(String[] args) {
+		/*Employee emp = new Employee();
+		emp.setFirstName("yogini");
+		emp.setLastName("Naik");
+		emp.setAge(33);
+		System.out.println(emp);*/
+		
+		Resource res = new ClassPathResource("beans.xml");
+		XmlBeanFactory factory =new XmlBeanFactory(res);
+		
+		Employee employee =(Employee) factory.getBean("emp");
+		/*employee.setFirstName("A");
+		employee.setLastName("B");
+		employee.setAge(20);*/
+		
+		System.out.println(employee);
+		
+		
+		
+		
+		UserCredentials users= (UserCredentials) factory.getBean("cred");
+		System.out.println(users);
+	}
+
+}
+------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">	
+	<!--  
+	using setter injection
+	
+	<bean id="emp" class ="com.cg.beans.Employee">
+	<property name= "firstName" value ="yogini"></property>
+	<property name= "lastName" value ="Naik"></property>
+	<property name= "age" value ="32"></property>
+	
+	</bean>
+
+	-->
+	  
+	<!-- 
+		using setter
+		<bean id="emp" class ="com.cg.beans.Employee">
+		<constructor-arg index ="0" value ="Yogini"></constructor-arg>
+		<constructor-arg index ="1" value ="Naik"></constructor-arg>
+		<constructor-arg index ="2" value ="33"></constructor-arg>
+	
+		</bean>
+		 -->
+		
+		
+			<!--   using constructor injection  --> 
+		<bean id="emp" class ="com.cg.beans.Employee">
+		<constructor-arg type ="String" value ="Yogini Naik"></constructor-arg>
+		<constructor-arg type = "int" value ="32"></constructor-arg>
+		<property name="skills">
+		<list>
+		<value>c</value>
+		<value>c++</value>
+		<value>java</value>
+		<value>hibernate</value>
+		<value>spring</value>
+		<value>Html 5</value>
+		<value>Css</value>
+		</list>
+		</property>
+		</bean> 
+		<bean id ="cred" class="com.cg.beans.UserCredentials" >
+		<property name ="credentials">
+		<map>
+		<entry key ="user1 " value ="user1@123" ></entry>
+		<entry key ="user2 " value ="user2@123" ></entry>
+		<entry key =" user3" value ="user3@123" ></entry>
+		<entry key =" user4" value ="user4@123" ></entry>
+		<entry key =" user5" value ="user5@123" ></entry>
+		<entry key =" user6" value ="user6@123" ></entry>
+		
+		</map>
+		
+		</property>
+		
+		
+		</bean>
+		
+		
+		</beans>
+		
+
+
+---------------------------
+
+
+package com.cg.beans;
+
+import java.util.HashMap;
+
+public class UserCredentials {
+HashMap<String, String> credentials;
+
+public HashMap<String, String> getCredentials() {
+	return credentials;
+}
+
+public void setCredentials(HashMap<String, String> credentials) {
+	this.credentials = credentials;
+}
+
+@Override
+public String toString() {
+	System.out.println("\n");
+	return "UserCredentials [credentials=" + credentials + "]"+"\n";
+}
+
+
+
+}
+====================================
+02 
+now yo want one to many 
+-------------------
+package com.cg.beans;
+
+import java.util.ArrayList;
+
+public class Employee {
+private String firstName;
+private String lastName;
+private int age;
+private Department dept;
+
+public Employee(String firstName, String lastName, int age) {
+	super();
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.age = age;
+	
+}
+public Employee() {
+	super();
+	//dept = new Department(1,"IT";)
+	// TODO Auto-generated constructor stub
+}
+
+
+public Employee(String name, int age) {
+	firstName= name.substring(0,name.indexOf(" "));
+	lastName= name.substring(name.indexOf(" ")+1);
+	this.age = age;
+}
+
+
+
+public Department getDept() {
+	return dept;
+}
+public void setDept(Department dept) {
+	this.dept = dept;
+}
+public String getFirstName() {
+	return firstName;
+}
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
+public String getLastName() {
+	return lastName;
+}
+public void setLastName(String lastName) {
+	this.lastName = lastName;
+}
+public int getAge() {
+	return age;
+}
+public void setAge(int age) {
+	this.age = age;
+}
+@Override
+public String toString() {
+	return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", dept=" + dept + "]";
+}
+
+
+
+}
+------
+
+
+
+package com.cg.beans;
+
+public class Department {
+	
+	private int deptNo;
+	private String deptName;
+	public Department() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Department(int deptNo, String deptName) {
+		super();
+		this.deptNo = deptNo;
+		this.deptName = deptName;
+	}
+	public int getDeptNo() {
+		return deptNo;
+	}
+	public void setDeptNo(int deptNo) {
+		this.deptNo = deptNo;
+	}
+	public String getDeptName() {
+		return deptName;
+	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+	@Override
+	public String toString() {
+		return "Department [deptNo=" + deptNo + ", deptName=" + deptName + "]";
+	}
+	
+	
+	
+	
+
+}
+
+
+---------------
+
+
+package com.cg.beans;
+
+
+
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+public class Client {
+	public static void main(String[] args) {
+	
+		
+		Resource res = new ClassPathResource("beans.xml");
+		XmlBeanFactory factory =new XmlBeanFactory(res);	
+		Employee employee1= (Employee) factory.getBean("emp1");
+		Employee employee2= (Employee) factory.getBean("emp2");
+		System.out.println(employee1);
+		System.out.println(employee2);
+		
+		
+		
+		
+	}
+
+}
+
+
+
+
+------------------
+package com.cg.beans;
+
+import java.util.HashMap;
+
+public class UserCredentials {
+HashMap<String, String> credentials;
+
+public HashMap<String, String> getCredentials() {
+	return credentials;
+}
+
+public void setCredentials(HashMap<String, String> credentials) {
+	this.credentials = credentials;
+}
+
+@Override
+public String toString() {
+	
+	return "UserCredentials [credentials=" + credentials + "]";
+}
+
+
+
+}
+
+
+------------
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">	
+	
+	  
+	
+		
+		<bean id="emp1" class ="com.cg.beans.Employee">
+		<property name= "firstName" value ="yogini"></property>
+		<property name= "lastName" value ="Naik"></property>
+		<property name= "age" value ="32"></property>
+													<!-- <property name= "dept" >
+													 <bean  class ="com.cg.beans.Department">
+													</bean> 
+													</property> -->
+		<property name ="dept" ref ="d1"></property>
+		</bean>
+		
+		<bean  id ="d1"  class ="com.cg.beans.Department">
+		<property name= "deptNo" value ="1"></property>
+		<property name= "deptName" value ="admin"></property>
+	
+		</bean>
+		
+		<bean id="emp2" class ="com.cg.beans.Employee">
+		<property name= "firstName" value ="Ashish"></property>
+		<property name= "lastName" value ="Bhatia"></property>
+		<property name= "age" value ="78"></property>
+		
+		<property name ="dept" ref ="d1"></property>
+		
+		</bean>
+		
+		</beans>
+		
+
+
+========================================
+
+
+autowiring 
+		-- byName
+		--byType
+		--constructor
+
+
+
+----
+package com.cg.beans;
+
+import java.util.ArrayList;
+
+public class Employee {
+private String firstName;
+private String lastName;
+private int age;
+private Department dept;
+
+public Employee(String firstName, String lastName, int age) {
+	super();
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.age = age;
+	
+}
+
+
+public Employee(Department dept)
+{
+	this.dept =dept;
+}
+public Employee() {
+	super();
+	//dept = new Department(1,"IT";)
+	// TODO Auto-generated constructor stub
+}
+
+
+public Employee(String name, int age) {
+	firstName= name.substring(0,name.indexOf(" "));
+	lastName= name.substring(name.indexOf(" ")+1);
+	this.age = age;
+}
+
+
+
+public Department getDept() {
+	return dept;
+}
+public void setDept(Department dept) {
+	this.dept = dept;
+}
+public String getFirstName() {
+	return firstName;
+}
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
+public String getLastName() {
+	return lastName;
+}
+public void setLastName(String lastName) {
+	this.lastName = lastName;
+}
+public int getAge() {
+	return age;
+}
+public void setAge(int age) {
+	this.age = age;
+}
+@Override
+public String toString() {
+	return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", dept=" + dept + "]";
+}
+
+
+
+}
+
+
+--------
+
+package com.cg.beans;
+
+public class Department {
+	
+	private int deptNo;
+	private String deptName;
+	public Department() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Department(int deptNo, String deptName) {
+		super();
+		this.deptNo = deptNo;
+		this.deptName = deptName;
+	}
+	public int getDeptNo() {
+		return deptNo;
+	}
+	public void setDeptNo(int deptNo) {
+		this.deptNo = deptNo;
+	}
+	public String getDeptName() {
+		return deptName;
+	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+	@Override
+	public String toString() {
+		return "Department [deptNo=" + deptNo + ", deptName=" + deptName + "]";
+	}
+	
+	
+	
+	
+
+}
+-----
+
+package com.cg.beans;
+
+
+
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+public class Client {
+	public static void main(String[] args) {
+	
+		
+		Resource res = new ClassPathResource("beans.xml");
+		XmlBeanFactory factory =new XmlBeanFactory(res);	
+		Employee employee1= (Employee) factory.getBean("emp1");
+		Employee employee2= (Employee) factory.getBean("emp2");
+		System.out.println(employee1);
+		System.out.println(employee2);
+		
+		
+		
+		
+	}
+}
+
+----------------
+
+package com.cg.beans;
+
+import java.util.HashMap;
+
+public class UserCredentials {
+HashMap<String, String> credentials;
+
+public HashMap<String, String> getCredentials() {
+	return credentials;
+}
+
+public void setCredentials(HashMap<String, String> credentials) {
+	this.credentials = credentials;
+}
+
+@Override
+public String toString() {
+	
+	return "UserCredentials [credentials=" + credentials + "]";
+}
+
+
+
+}
+
+
+--------------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">	
+	<!--  
+	using setter injection
+	
+	<bean id="emp" class ="com.cg.beans.Employee">
+	<property name= "firstName" value ="yogini"></property>
+	<property name= "lastName" value ="Naik"></property>
+	<property name= "age" value ="32"></property>
+	
+	</bean>
+
+	-->
+	  
+	<!-- 
+		using setter
+		<bean id="emp" class ="com.cg.beans.Employee">
+		<constructor-arg index ="0" value ="Yogini"></constructor-arg>
+		<constructor-arg index ="1" value ="Naik"></constructor-arg>
+		<constructor-arg index ="2" value ="32"></constructor-arg>
+	
+		</bean>
+		 -->
+		
+		<bean id="emp1" class ="com.cg.beans.Employee" autowire ="constructor">       <!--  byType orbyName or constructor-->
+		<property name= "firstName" value ="A"></property>
+		<property name= "lastName" value ="B"></property>
+		<property name= "age" value ="32"></property>
+													<!-- <property name= "dept" >
+													 <bean  class ="com.cg.beans.Department">
+													</bean> 
+													</property> -->
+		<!-- <property name ="dept" ref ="d1"></property> -->
+		</bean>
+		
+		<bean  id ="d1"  class ="com.cg.beans.Department">
+		<property name= "deptNo" value ="1"></property>
+		<property name= "deptName" value ="admin"></property>
+	
+		</bean>
+		
+		<bean  id ="dept"  class ="com.cg.beans.Department">
+		<property name= "deptNo" value ="2"></property>
+		<property name= "deptName" value ="finance"></property>
+	
+		</bean>
+		
+		<bean id="emp2" class ="com.cg.beans.Employee">
+		<property name= "firstName" value ="C"></property>
+		<property name= "lastName" value ="D"></property>
+		<property name= "age" value ="78"></property>
+		
+		<property name ="dept" ref ="d1"></property>
+		
+		</bean>
+		
+		</beans>
+		
