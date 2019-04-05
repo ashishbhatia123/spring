@@ -13,5 +13,6 @@
 7.springMVCApplication4
 8.springMVC5_jpaIntegration
 9.springMVC5_jpaIntegration2
-10.springmvc_mam
-11.springBootJPAIntegration
+10.springMVC5_jpaIntegration3
+11.springmvc_mam
+12.springBootJPAIntegration
