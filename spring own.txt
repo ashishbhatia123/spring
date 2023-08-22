@@ -1,0 +1,370 @@
+1.--object creation, calling using spring. i.e bean.xml and ioc container 
+
+ioc Container
+dependency injection
+application context 
+bean factory 
+constructorInjection
+setterInjection
+tightcoupling/loosecoupling
+scopOfBean
+
+
+conext file
+	--contains all classes
+		 - -> bean.xml --> beanTag --> [id ,class] id<-- reference, class <-- class name 
+ioc container
+	-- object stores 
+	-- use object 
+	--types of Ioc Container
+		--BeanFactory	--(I)   == nokia1100
+		--ApplicationContext	-- (I)   == nokia 6
+			-- ClassPathXmlApplicationContext()	-- (c)
+	
+	
+Dependencies		
+	-- attribute of classes
+		--Dependency in the form of literals   <-- int ,String ,char attribute
+		--Dependency in the form of object    <--  className attribute
+		--Dependency in the form of collection  <--collection attribute
+DependencyInjection 
+	-- injecting/putting the values into these attributes by use of spring.
+	--types of injection
+		--setterInjection 
+			--inject values through setter method
+			--<propery name="" value= ""/> is used 
+		--constructorInjection
+			--inject values throws constructor
+			--<constructor-arg name="" value=""/> tag is used
+
+
+
+
+
+
+
+
+
+
+
+
+
+class B
+{
+m1()
+}
+
+
+class A
+{
+B s1;
+}
+
+main 
+{
+psvm
+{
+A aObj = new A();
+aObj.s1 = new B();
+aObj.s1.m1();
+
+
+A aObj = new A(); --
+B bObj= new B(); --
+aObj.setS1(bObj).m1();
+
+
+bean.xml		--(wrong)
+<bean id="bObj" class="B">
+<bean id="aObj" class= "A">
+<property name="s1" value="bObj"/>
+</bean>
+
+bean.xml		--(right)
+<bean id="bObj" class="B">
+<bean id="aObj" class= "A">
+<property name="s1" ref="bObj"/>
+</bean>
+
+bean.xml		--(wrong)
+<bean id="aObj" class= "A">
+<property name="s1"  value="bObj"><bean id="bObj" class="B">
+</property>
+</bean>
+
+
+bean.xml		--(right)
+<bean id="aObj" class= "A">
+<property name="s1"  ><bean class="B"></bean>
+</property>
+</bean>
+
+
+bean.xml		--(right but not fulfilling loose coupling)
+<bean id="bObj" class= "B">
+<bean id="aObj" class= "A">
+main
+{
+psvm
+{
+ApplicationContext context <-- ioc container load <-- object
+B bObj1=(B)context.getBean("bObj");
+A aObj1=(A)context.getBean("aObj");
+aObj1.setS1(nObj1).m1();
+}
+
+
+
+
+9420097000
+
+
+class B
+{
+m1()
+}
+
+
+class A
+{
+B s1[] ;
+}
+
+main
+{
+psvm
+{
+A aObj= new A();
+aObj.s1= new B[20];
+for(int i=0;i<aObj.s1.length;i++)
+{
+aObj.s1[i]=new B();
+}
+
+aObj.s1[1].m1();
+aObj.s1[2].m1();
+aObj.s1[3].m1();
+}
+}
+
+
+bean.xml
+<bean id="aObj" class="A">
+<property name ="s1" value="new B[20]"><bean class="B"></bean>
+</property>
+
+
+
+
+
+classB
+{
+List<product> list
+}
+class Product
+{
+---- attributes are there
+-----
+}
+class A				<-- starting point
+{
+string s;
+int i;
+1. Product p;
+2. int arr[];
+3.string arr[];
+4. product arr[];
+5.List<String> listString
+6.List<Product> listProd
+7.Map<Integer, String> mapI-S
+8.Map<String,Integer> mapS-I
+9.Map<String,String> mapS-S
+10.Map<String,Product> mapS-P
+11.Map<product,String> mapP-S
+12.Map<product,Product> mapP-P
+13.Map<String,List<Product>> mapS-L
+ 
+}
+
+
+<array>
+<value>ashish</value>
+<ref bean=""/>
+</array>
+
+<list>
+<value>ashish</value>
+<ref bean=""/>
+</list>
+
+<map>
+<entry key="" key-ref="" value="" value-ref=""/>
+</map>
+
+<bean id="" class="">
+<bean id="" class="">
+<property name="" value="" ref=""></property>
+</bean>
+
+
+1. Product p;1. 				(right)
+<bean id="productObj" class="Product">		
+<bean id="aObj" class="A">
+<property name="p" value="" ref=""></property>
+</bean>
+
+2.int arr[];		(right)
+<bean id="" class="">
+<bean id="aObj" class="A">
+<property name="arr" >
+<array>
+<value ="1">
+<value ="2">
+</array>
+</property>
+</bean>
+
+3.string arr[];  			(right)
+<bean id="" class="">
+<bean id="aObj" class="A">
+<property name="arr" >
+<array>
+<value >1</value>
+<value >2</value>
+<value>ashish</value>
+</array>
+</property>
+</bean>
+		
+4. product arr[];					(right)
+<bean id="prod1" class="Product"></bean>
+<bean id="prod2" class="Product"></bean>
+<bean id="aObj" class="A">
+<property name="arr" >
+<array>
+<ref bean="prod1">
+<ref bean="prod2">
+</array>
+</property>
+</bean>
+
+5.List<String> listString		(right)
+<bean id="" class="">
+<bean id="aObj" class="A">
+<property name="listString" >
+<list>
+<value="ashish"/>
+<value ="bhatia"/>
+</list>
+</property>
+</bean>
+
+
+6.List<Product> listProd				(right)
+<bean id="Prod1" class="Product"></bean>
+<bean id="Prod2" class="Product"></bean>
+<bean id="aObj" class="A">
+<property name="listProd" >
+<list>
+<ref bean ="Prod1"/>
+<ref bean="Prod2"/>
+<list>
+</property>
+</bean>
+
+7.Map<Integer, String> mapI-S		(right)
+<bean id="" class="">
+<bean id="aOBj" class="A">
+<property name ="mapI-S">
+<map>
+<entry key="1" value="ashish">
+<entry key="2" value="bhatia">
+</map>
+</property>
+</bean>
+
+8.Map<String,Integer> mapS-I		(right)
+<bean id="" class="">
+<bean id="aOBj" class="A">
+<property name ="mapS-I">
+<map>
+<entry key="ashish" value="1">
+<entry key="bhatia" value="2">
+</map>
+</property>
+</bean>
+
+9.Map<String,String> mapS-S		(right)
+<bean id="" class="">
+<bean id="aOBj" class="A">
+<property name ="mapS-S">
+<map>
+<entry key="ashish" value="1">
+<entry key="bhatia" value="2">
+</map>
+</property>
+</bean>
+
+10.Map<String,Product> mapS-P			(right)
+<bean id="prodObj1" class="Product"></bean>
+<bean id="prodObj2" class="Product"></bean>
+<bean id="aObj" class="A">
+<property name="mapS-P" >
+<map>
+<entry key="ashish" value-ref="prodObj1"/>
+<entry key="ashish" value-ref="prodObj2"/>
+</map>
+</property>
+</bean>
+
+
+11.Map<product,String> mapP-S			(right)
+<bean id="prodKey1" class="Product"></bean>
+<bean id="prodKey2" class="Product"></bean>
+<bean id="aObj" class="A">
+<property name="mapP-S" >
+<map>
+<entry key-ref="productKey1" value="ashish">
+<entry key-ref="productKey2" value="bhatia">
+</map>
+</property>
+</bean>
+
+12.Map<product,Product> mapP-P			(right)
+<bean id="prodKey1" class="Product"></bean>
+<bean id="prodKey2" class="Product"></bean>
+<bean id="prodValue1" class="Product"></bean>
+<bean id="prodValue2" class="Product"></bean>
+<bean id="aObj" class="A">
+<property name="mapP-P" >
+<map>
+<entry key-ref="productKey1" value-ref="productValue1">
+<entry key-ref="productKey2" value-ref="productValue2">
+</map>
+</property>
+</bean>
+
+13.Map<String,List> mapS-L				(right)
+<bean id="prodObj1" class="Product"></bean>
+<bean id="prodObj2" class="Product"></bean>
+<bean id="listObj" class="B">
+<property name="list" >
+<list>
+<ref-bean="prodObj1"/>
+<ref-bean="prodObj2"/>
+</list></property></bean>
+<bean id="aObj" class="A">				<-- starting point
+<property name="mapS-L" >
+<map>
+<entry key="ashish" value-ref="6-aObj">
+</property>
+</bean>
+
+
+
+<bean id="" class="">
+<bean id="" class="">
+<property name="" value="" ref=""></property>
+</bean>
+
+			
